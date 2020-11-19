@@ -20,6 +20,6 @@ public class TextController {
     public String Buscador(){
         return "buscador";
     }
- 
+    
 }
 
