@@ -1,9 +1,9 @@
 package com.example.Movie.Model;
 
 public class Movie {
+    private String id;
     private String title;
     private String year;
-    private String id;
 
     public Movie(){}
 

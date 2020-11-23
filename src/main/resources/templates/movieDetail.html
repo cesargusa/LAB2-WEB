@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:insert="~{fragments/changelang.html :: header}">
+
+</header>
+<body id="todo">
+    <div th:replace="~{fragments/changelang.html :: body}"></div>
+    <h1 style="font-family: 'Montserrat', sans-serif;text-align: center;font-size: 70px;">MOVIES DETAILS</h1>
+    <div >
+        <a th:href="@{/V2/movies/Buscador}">
+        <button style="background-color: black;color: white;width: 130px;cursor: pointer;">HOME</button>
+    </a>
+    </div>
+    <div style="margin-left: 12%;margin-top: 6%;">
+    <li th:each="detail : ${movieDetail}"
+        th:object="${detail}" style="list-style: none;">
+       
+        <div><span style="color:black;font-weight: bolder;font-size: 30px; font-family: 'Montserrat', sans-serif;"
+        th:text="*{title}"></span>
+    </div>
+    <div style="background-color: black; color: red; font-size: 40px;width: 299px;text-align: center;">
+        <span  th:if="*{year=='2020'}">NEW</span> 
+    </div>
+    <div>
+           
+        <img th:src="*{poster}">
+</div>
+        <br>
+       <div style="font-family: 'Montserrat', sans-serif;font-size: 23px;">
+        <p>Year: <span th:text="*{year}" ></span></p>
+        <br>
+        <div style="background-color: black;width: 50%;">
+            <p style="font-family: 'Montserrat', sans-serif;font-size: 23px;color: yellow;">Description:</p>
+
+            <span style="background-color: black;color:wheat;" th:text="*{description}"></span>
+
+        </div>
+       
+    </li>
+ </div>
+
+
+</body>
+
+</html>
