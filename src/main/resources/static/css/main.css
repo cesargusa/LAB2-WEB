@@ -1,0 +1,43 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+#buscador{
+    background-color: #fafafa;
+    border: 1px solid #e8e8e8;
+    margin-left: 5%;
+    margin-right: 5%;
+    
+
+}
+#buscador2{
+    margin-left: 35%; margin-top: 2%;
+}
+#peliculas-h1{
+    margin-left: 15%;
+}
+#resultado{
+    margin-left: 20%;
+}
+#resultado2{
+    
+    width: 22%;
+    margin-left: 20%;
+}
+#resultado2 button{
+    width: 72%;
+}
+li{
+    list-style: none;
+}
+#resultado2 h1{
+    color:black;
+    font-weight: bolder;
+    font-size: 30px;
+}
+#novedad{
+    background-color: black; 
+    color: red; 
+    font-size: 40px;
+    width: 299px;
+text-align: center;
+}
