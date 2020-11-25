@@ -4,7 +4,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script type="text/javascript" th:src= "@{js/actions.js}"></script>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <header th:insert="~{fragments/changelang.html :: header}">
 </header>
@@ -12,128 +12,54 @@
 
  <div th:replace="~{fragments/changelang.html :: body}"></div>
  
-<div style="background-color: #fafafa; border: 1px solid #e8e8e8;margin-left: 5%;margin-right: 5%;">
-    <div style="margin-left: 35%; margin-top: 2%;">
+<div id="buscador">
+    <div id="buscador2" >
         <label th:text="#{titulo}"></label>
         <input type="text" id="title" placeholder="Joker">
-        &nbsp;&nbsp;
+       
         <label th:text="#{ano}">:</label>
-        <input type="number" min="0" max="9999" id="year" placeholder="2019" style="width: 100px;">
-        &nbsp;&nbsp;
-        &nbsp;&nbsp;
+        <input type="number" min="0" max="9999" id="year" placeholder="2019">
+        
 
         <button onclick="enviar()" type="button" id="enviar" th:text="#{buscar}" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-            VER MAS
           </button>  
     </div>
     <div>
-        <h1 style="margin-left: 15%;" th:text="#{peliculas}"></h1>
+        <h1 id="peliculas-h1" th:text="#{peliculas}"></h1>
     </div>
     
-    <ul></ul>
+   
 </div>
-<div id="resultado" style="margin-left: 20%;">
-    <div style="width: 22%;">
-        <li  style="list-style: none;" th:each="buscadorV2 : ${buscadorV2}" th:object="${buscadorV2}">
-            
-        <h1 style="color:black;font-weight: bolder;font-size: 30px;" th:text="*{title}"></h1>
-        <div style="background-color: black; color: red; font-size: 40px;width: 299px;text-align: center;">
+<div id="resultado2">
+        <li th:each="buscadorV2 : ${buscadorV2}" th:object="${buscadorV2}">
+       <div> 
+        <h1 th:text="*{title}"></h1>
+    </div>  
+        <div id="novedad">
                 <span th:text="#{nuevo}" th:if="*{year=='2020'}"></span> </div>
         <img th:src="@{*{poster}}">
+        <div>
         <a th:href="@{/V2/movies/Buscador/detail(id=*{id})}"><button th:text="#{mas}"type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
            </button></a>
-        
+        </div>
     </li>
     
      </div>
 </div>
 </body>
-<style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-    }
-</style>
+
 <script>
    function enviar(){
-       
-       let title = document.getElementById('title').value;
+    let title = document.getElementById('title').value;
        let year = document.getElementById('year').value;
        let dire = "http://localhost:9092/V2/movies/Buscador";
        let direYear = "http://localhost:9092/V2/movies/Buscador?year=";
        let direTitle = "http://localhost:9092/V2/movies/Buscador?title=";
-       if(year==='' && title===''){
-           window.location.href=dire;
-           return;
-       } 
-      if(year==='' && title!==''){
-        window.location.href = direTitle + title;
-        return;
-      }
-      if(year!=='' && title===''){
-        window.location.href = direYear + year;
-        return;
-      }
-      if(year!=='' && title!==''){
-          window.location.href = "http://localhost:9092/V2/movies/Buscador?title=" + title + "&?year=" + year;
-          return;
-      }
+      
+     window.location.href= "http://localhost:9092/V2/movies/Buscador?title=" + title + "&year=" + year;
        
+
        }
 </script>
-<!-- <script>
-    document.getElementById('enviar').onclick = enviar;
-    let api = "http://localhost:9092/V2/movies";
-    let re = false;
-
-
-   
-    function enviar() {
-        let title = document.getElementById('title').value;
-        let year = document.getElementById('year').value;
-        $('#resultado').empty();
-        fetch(api)
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(item => {
-                    console.log(item)
-                   function AddJson() {
-                        $('#resultado').append(`
-                        <div style="width:12%;">
-                        <h1>${item.title}</h1>
-                        <img src="${item.poster}">
-                      <a href="http://localhost:9092/V2/movies/Buscador/detail?id=${item.id}">  <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-VER MAS</button></a>
-                      </div>
-                        `); 
-                        return re = true;
-                      
-                    }
-                    if (title === '' && year === '') {
-                        AddJson();
-                        return;
-                    }
-                    if (item.title.includes(title) && year === ''){
-                         AddJson();
-                         return;
-                    }
-                    if (item.year === year && title === '') {
-                         AddJson();
-                         return;
-                    }
-                   
-                    if (item.title.includes(title) && item.year === year) {
-                        AddJson();
-                        return;
-                    }
-
-                });
-                if (re === false) $('#resultado').append(`<h1>NO RESULTS</h1>`);
-            })
-    }
-
-
-
-
-</script> -->
 
 </html>
